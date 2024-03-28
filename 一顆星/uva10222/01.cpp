@@ -9,7 +9,6 @@ int main(){
     string table = "`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./";
 
     while(getline(cin, str)){
-
     for(int i = 0; i < str.size(); i++){
         if(str[i]  == ' '){
             cout << " ";
