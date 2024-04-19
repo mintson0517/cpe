@@ -11,11 +11,13 @@ int main() {
         }
 
         int count = 0;
-        for (int i = sqrt(a); i * i <= b; i++) {
-            count++;
+        for (int i = a; i <= b; i++) {
+            int root = sqrt(i);
+            if (root * root == i) {
+                count++;
+            }
         }
-
-        cout << count << endl;
+        cout << count << endl; 
     }
     return 0;
 }
