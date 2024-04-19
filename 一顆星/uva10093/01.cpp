@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// 生成映射表
 map<char, int> generate() {
     map<char, int> num;
     int index = 0;
