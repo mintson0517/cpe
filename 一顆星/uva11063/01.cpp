@@ -1,30 +1,46 @@
-#include <stdio.h>
+#include <iostream>
+using namespace std;
 
-int main() {
-    int b[1001] = {0}, n, test = 0, i, j;
-    while(scanf("%d", &n) == 1) {
-        int flag = 0;
-        for(i = 1; i <= n; i++) {
-            scanf("%d", &b[i]);
-            if(b[i] <= b[i-1]) {
-                flag = 1;
+int main(){
+    int n, check, tmp;
+    int caseNum = 0;
+
+    while (cin >> n){
+        caseNum++;
+        check = 1; // initialize check to yes which means this sequence is a B2-seq
+
+        int seq[n];
+        for (int i = 0; i < n; i++){
+            cin >> seq[i];
+            if (seq[i] < 1){
+                check = 0;
+            }
+            if (i != 0 && seq[i-1] >= seq[i]){
+                check = 0;
             }
         }
-        int mark[20001] = {};
-        if(flag == 0)
-        for(i = 1; i <= n; i++) {
-            for(j = i; j <= n; j++) {
-                if(mark[b[i]+b[j]] != 0)
-                    flag = 1;
-                mark[b[i]+b[j]] = 1;
+        int sum[20001] = {0}; // use a table to record which num is appeared
+
+        if (check == 1){
+            for (int j = 0; j < n; j++){
+                for (int k = j; k < n; k++){
+                    tmp = seq[j] + seq[k];
+                    if (sum[tmp] == 0){
+                        sum[tmp] = 1;
+                    } else {
+                        check = 0;
+                        break;
+                    }
+                }
             }
         }
-        printf("Case #%d: It is ", ++test);
-        if(!flag)
-            puts("a B2-Sequence.");
-        else
-            puts("not a B2-Sequence.");
-        puts("");
+
+        if (check == 0){
+            cout << "Case #" << caseNum << ": It is not a B2-Sequence." << endl;
+        } else {
+            cout << "Case #" << caseNum << ": It is a B2-Sequence." << endl;
+        }
+        cout << endl;
     }
     return 0;
 }
