@@ -6,7 +6,7 @@ int main() {
     while (cin >> num) {
         if (num == 0) break;
 
-        int count = 0, temp = 0; // count for binary conversion, temp for counting 1s
+        int count = 0, temp = 0;
         int a[32] = {0};
 
         while (num != 0) {
