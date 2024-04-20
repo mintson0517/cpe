@@ -7,7 +7,7 @@ int main(){
 
     while (cin >> n){
         caseNum++;
-        check = 1; // initialize check to yes which means this sequence is a B2-seq
+        check = 1; 
 
         int seq[n];
         for (int i = 0; i < n; i++){
@@ -19,7 +19,7 @@ int main(){
                 check = 0;
             }
         }
-        int sum[20001] = {0}; // use a table to record which num is appeared
+        int sum[20001] = {0}; 
 
         if (check == 1){
             for (int j = 0; j < n; j++){
