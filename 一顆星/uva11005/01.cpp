@@ -1,66 +1,54 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 using namespace std;
-long long int cal_cost_of_base(int[], long long int, int);
 
 int main(){
-    int test_case_num, query_num;
-    int cost[36];
-
-    cin >> test_case_num;
-    for (int i = 0; i < test_case_num; i++){
-        if (i != 0){
-            cout << endl;
-        }
-        cout << "Case " << (i+1) << ":" << endl;
-        
-        for (int j = 0; j < 36; j++){
-            cin >> cost[j];
-        }
-
-        cin >> query_num;
-        long long int queries[query_num];
-
-        for (int j = 0; j < query_num; j++){
-            cin >> queries[j];
-
-            long long int min_cost = 0;
-            vector<int> all_cost;
-
-            for (int k = 2; k <= 36; k++){
-                long long int tmp = cal_cost_of_base(cost, queries[j], k);
-                all_cost.push_back(tmp);
-                if (min_cost >= tmp || min_cost == 0){
-                    min_cost = tmp;
-                }
-            }
-
-            cout << "Cheapest base(s) for number " << queries[j] << ":";
-            for (int k = 0; k < all_cost.size(); k++){
-                if (all_cost[k] == min_cost){
-                    cout << " " << (k+2);
-                }
-            }
-            cout << endl;
-        }
-    }
-    return 0;
-}
-
-long long int cal_cost_of_base(int cost[], long long int num, int base){
-    vector<int> expressed_in_base;
-    long long int totalCost = 0;
-
-    while (num > 0){
-        expressed_in_base.push_back(num % base);
-        num /= base;
-    }
-    reverse(expressed_in_base.begin(), expressed_in_base.end());
-    
-    for (int i = 0; i < expressed_in_base.size(); i++){
-        totalCost += cost[expressed_in_base[i]];
-    }
-
-    return totalCost;
+	int in1,c=1,i,n,in2,cn1,re,cost[36];
+	
+	cin>>in1;//輸入測資組數 
+	while(c<=in1){
+		cout<<"Case "<<c<<":"<<endl;//輸出第幾組 
+		
+		for(i=0;i<36;i++)//輸入花費 {
+			cin>>cost[i];
+		}
+		
+		cin>>n;//輸入數字數量 
+		while(n--){
+			cin>>in2;//輸入數字 
+			
+			int min=0,de[37]={0};//歸零 
+			
+			for(i=2;i<=36;i++)//計算每個進位的價錢 {
+				cn1=in2;//原本的數字不能動所以用其他變數 
+				int sum=0;//歸零 
+				
+				while(cn1>0)//利用短除法將十進位轉成任何進位 {			
+					re=cn1%i;//取得餘數就是該進位要轉的數字 
+					sum=sum+cost[re];//計算價錢 
+					cn1=cn1/i;
+				}
+				
+				if(min==0||sum<=min)//紀錄最少的花費 {
+					de[i]=sum;
+					min=sum;
+				}
+			}
+			
+			cout<<"Cheapest base(s) for number "<<in2<<":";//輸出 
+			
+			for(i=2;i<=36;i++){
+				if(de[i]==min)//輸出花費最少的進位 
+				{
+					cout<<" "<<i;
+				}
+			}
+			cout<<endl;
+		}
+		
+		if(c<in1)//最後一組測資不用換行 {
+			cout<<endl;
+		}
+		c++;
+	}
+	return 0;
 }
