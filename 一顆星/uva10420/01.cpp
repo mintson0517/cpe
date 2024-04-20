@@ -18,4 +18,5 @@ int main(){
     for(auto i: mp){
         cout << i.first << " " << i.second << endl;
     }
+    return 0;
 }
