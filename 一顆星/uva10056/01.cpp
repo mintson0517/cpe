@@ -5,7 +5,7 @@ using namespace std;
 
 int main(){
     int s, n, i_th;
-    double p; // probability of successful event
+    double p; 
     double q, ans;
 
     cin >> s;
