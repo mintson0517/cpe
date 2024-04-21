@@ -1,54 +1,41 @@
 #include <iostream>
-#include <cstring>
+#include <string>
 using namespace std;
 
-int degree(char *str) {
-    int i;
-    int multiple, D = 0;
+int main(){
+    string num, tmp;
+    int digitSum, degree;
 
-    if (strlen(str) == 1 && str[0] == '9') {
-        return 1;
-    }
-
-    while (strlen(str) >= 2) {
-        multiple = 0;
-
-        for (i = 0; i < strlen(str); i++) {
-            multiple = multiple + str[i] - '0';
+    cin >> num;
+    while (num != "0"){
+        digitSum = 0;
+        degree = 0;
+        
+        // check if digitSum is multiple of 9 
+        for (int i = 0; i < num.length(); i++){
+            digitSum = digitSum + (num[i] - '0');
         }
-
-        if (multiple % 9 == 0) {
-            D++;
-        }
-
-        sprintf(str, "%d", multiple);
-    }
-
-    return D;
-}
-
-int main() {
-    char N[1001] = {0};
-
-    while (scanf("%s", N)) {
-        if (N[0] == '0' && strlen(N) == 1) {
-            break;
-        } else {
-            cout << N << " ";
-
-            int D = degree(N);
-
-            if (D) {
-                cout << "is a multiple of 9 and has 9-degree " << D << ".";
-            } else {
-                cout << "is not a multiple of 9.";
+        
+        // if digitSum is multiple of 9, check its 9-degree
+        while (digitSum != 0 && digitSum != 9 && digitSum % 9 == 0){
+            degree++;
+            tmp = to_string(digitSum);
+            digitSum = 0;
+            for (int i = 0; i < tmp.length(); i++){
+                digitSum = digitSum + (tmp[i] - '0');
             }
-
-            cout << endl;
+        }
+        if(digitSum == 9){
+            degree++;
+        }
+        
+        if (degree == 0){
+            cout << num << " is not a multiple of 9." << endl;
+        } else {
+            cout << num << " is a multiple of 9 and has 9-degree " << degree << "." << endl;
         }
 
-        memset(N, 0, sizeof(N));
+        cin >> num;
     }
-
     return 0;
 }
