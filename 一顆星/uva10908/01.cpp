@@ -1,55 +1,51 @@
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 int main(){
-    int testCaseNum;
-    int height, width, squareLocationNum;
-    int row, column; // location of square
-    int largestSide_half;
-
-    cin >> testCaseNum;
-    for(int i = 0; i < testCaseNum; i++){
-        cin >> height >> width >> squareLocationNum;
-        cout << height << " " << width << " " << squareLocationNum << endl;
-        
-        string square[height];
-        for (int m = 0; m < height; m++){
-            cin >> square[m];
-        }
-
-        for (int j = 0; j < squareLocationNum; j++){
-            cin >> row >> column;
-            largestSide_half = 0; // the length between center and side
-
-            char center = square[row][column];
-
-            int largestHeight = (row < (height-row-1)) ? row : height-row-1;
-            int largestWidth = (column < (width-column-1)) ? column : width-column-1;
-            int largestPossibleSide_half = (largestHeight < largestWidth) ? largestHeight : largestWidth;
-
-            // check if there is x length of a side of square, x = k * 2 + 1
-            bool isSquare;
-            for (int k = 1; k <= largestPossibleSide_half; k++){
-                isSquare = true;
-                for (int m = row-k; m <= row+k; m++){
-                    for (int n = column-k; n <= column+k; n++){
-                        if (square[m][n] != center){
-                            isSquare = false;
-                            break;
-                        }
-                    }
-                }
-                
-                if (isSquare){
-                    largestSide_half++;
-                } else {
-                    break;
-                }
-            }
-
-            cout << largestSide_half*2+1 << endl;
-        }
+  int T;
+  cin >> T;
+  
+  for(int i = 0; i < T; i++){
+    int N, M, Q, row, column;
+    cin >> N >> M >> Q;
+    cout << N << " " << M << " " << Q << endl;
+    
+    string square[N];
+    for(int i = 0; i < N; i++){
+      cin >> square[i];
     }
-    return 0;
+    
+    for(int j = 0; j < Q; j++){
+      cin >> row >> column;
+      
+      int l_half = 0;
+      
+      char center = square[row][column];
+      
+      int l_height = (row < (N - row - 1)) ? row : N - row - 1;
+      int l_width = (column < (M - column - 1)) ? column : M - column - 1;
+      int half = (l_height < l_width ) ? l_height : l_width;
+      
+      bool isSquare;
+      for(int k = 1; k <= half; k++){
+        isSquare = true;
+        for(int m = row - k; m <= row + k; m++){
+          for(int n = column - k; n <= column + k; n++){
+            if(square[m][n] != center){
+              isSquare = false;
+              break;
+            }
+          }
+        }
+        if(isSquare){
+          l_half++;
+        }else{
+          break;
+        }
+      }
+      cout << l_half*2+1 << endl;
+    }
+  }
+  return 0;
 }
