@@ -5,17 +5,19 @@
 using namespace std;
 
 int main(){
-    int totalcase;
-    string str;
-    cin >> totalcase;
+    int T;
+    cin >> T;
 
+    string s;
+  
     map<string, int> mp;
-    while(totalcase--){
-        cin >> str;
-        mp[str]++;
-        getline(cin,str);
+    while(T--){
+        cin >> s;
+        mp[s]++;
+        getline(cin, s); 
     }
-    for(auto i: mp){
+
+    for(auto& i: mp){
         cout << i.first << " " << i.second << endl;
     }
     return 0;
