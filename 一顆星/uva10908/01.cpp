@@ -31,7 +31,7 @@ int main(){
         isSquare = true;
         for(int m = row - k; m <= row + k; m++){
           for(int n = column - k; n <= column + k; n++){
-            if(m < 0 || m >= N || n < 0 || n >= M || square[m][n] != center){
+            if(square[m][n] != center){
               isSquare = false;
               break;
             }
