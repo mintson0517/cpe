@@ -1,32 +1,26 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
-int gcd(int a, int b)
-{
-    if (b == 0)
-        return a;
+int gcd(int a, int b){
+  if(b == 0){
+    return a;
+  }else{
     return gcd(b, a % b);
+  }
 }
 
-int main()
-{
-    int N, i, j;
-    while (cin >> N)
-    {
-        if (N == 0)
-            break;
-        int G = 0;
-
-        for (i = 1; i < N; i++)
-        {
-            for (j = i + 1; j <= N; j++)
-
-            {
-
-                G += gcd(i, j);
-            }
-        }
-        cout << G << endl;
+int main(){
+  int N, i, j;
+  while(cin >> N && N != 0){
+    int sum = 0;
+    
+    for(i = 1; i < N; i++){
+      for(int j = i + 1; j <= N; j++){ 
+        sum += gcd(i, j);
+      }
     }
-    return 0;
+    cout << sum << endl;
+  }
+  return 0;
 }
