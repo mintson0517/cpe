@@ -1,42 +1,46 @@
 #include <iostream>
-#include <string>
-#include <algorithm>
-
 using namespace std;
 
-int main() {
-    string a, b;
+int main()
+{
+    int a, b;
+    while (true)
+    {
+        cin >> a >> b;
 
-    while (cin >> a >> b) {
-        if (a == "0" && b == "0") return 0;
-
-        reverse(a.begin(), a.end());
-        reverse(b.begin(), b.end());
+        if (a == 0 && b == 0)
+        {
+            break;
+        }
 
         int carry = 0;
-        int carry_count = 0;
+        int carryCount = 0;
 
-        for (int i = 0; i < max(a.size(), b.size()); ++i) {
-            int sum = carry;
-            if (i < a.size()) sum += a[i] - '0';
-            if (i < b.size()) sum += b[i] - '0';
+        while (a > 0 || b > 0)
+        {
+            int digitA = a % 10;
+            int digitB = b % 10;
 
-            if (sum >= 10) {
+            int sum = digitA + digitB + carry;
+
+            if (sum >= 10)
+            {
                 carry = 1;
-                ++carry_count;
-            } else {
+                carryCount++;
+            }
+            else
+            {
                 carry = 0;
             }
+            a /= 10;
+            b /= 10;
         }
-
-        if (carry_count == 0) {
+        if (carryCount == 0) {
             cout << "No carry operation." << endl;
-        } else if (carry_count == 1) {
+        } else if (carryCount == 1) {
             cout << "1 carry operation." << endl;
         } else {
-            cout << carry_count << " carry operations." << endl;
+            cout << carryCount << " carry operations." << endl;
         }
     }
-
-    return 0;
 }
